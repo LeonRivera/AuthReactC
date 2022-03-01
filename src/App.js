@@ -1,11 +1,13 @@
 import { Fragment } from "react";
-import LoginComponent from "./components/LoginComponent";
+import './App.css'
+
+import UserCompontent from "./components/UserComponent";
 
 
 function App() {
   return (
     <Fragment>
-        <LoginComponent></LoginComponent>
+        <UserCompontent></UserCompontent>
     </Fragment>
   );
 }
