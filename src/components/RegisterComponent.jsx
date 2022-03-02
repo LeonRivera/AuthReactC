@@ -5,7 +5,7 @@ import './LoginComponent.css';
 const RegisterComponent = ({handleEvent, handleUser}) => {
 
     // console.log(handleUser.email);
-    console.log(handleUser.email + "objeto en register");
+    // console.log(handleUser.email + "objeto en register");
     // console.log(handleEvent.component);
 
     const handleInputChange = (e) => {
