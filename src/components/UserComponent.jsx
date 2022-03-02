@@ -19,8 +19,8 @@ const UserCompontent = (props) => {
     console.log("objeto en userComponent.mail: " + user.email);
 
 
-    if(componente === "") return <HomeComponent></HomeComponent>;
-    // if(componente === "") return <LoginComponent handleEvent={setComponente}></LoginComponent>;
+    // if(componente === "") return <HomeComponent></HomeComponent>;
+    if(componente === "") return <LoginComponent handleEvent={setComponente}></LoginComponent>;
 
     if(componente === "register") return <RegisterComponent handleEvent={setComponente}
     handleUser={user}></RegisterComponent>
