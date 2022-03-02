@@ -8,20 +8,35 @@ const CodigoComponent = ({ handleUser, handleEvent }) => {
 
     const [codigoInput, setCodigoInput] = useState("");
 
-    
+
     const handleInputChange = (e) => {
-            if(e.target.name === "codigo"){
-                setCodigoInput(e.target.value);
-                console.log(codigoInput);
-            }
+        if (e.target.name === "codigo") {
+            setCodigoInput(e.target.value);
+            console.log(codigoInput);
+        }
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(codigoRest === codigoInput){
-        console.log("correctos");
-        handleEvent("");
-        }else{
+        if (codigoRest === codigoInput) {
+            console.log("correctos");
+            let urlValidate = 'http://brc2022.somee.com/api/User1';
+            fetch(urlValidate, {
+                method: 'POST',
+                body: JSON.stringify({ email: handleUser.email, password: handleUser.password, telefono: handleUser.telefono }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    if (data === "contraseña correcta") {
+                        handleEvent("home")
+                    }
+                })
+            handleEvent("");
+        } else {
             console.log("incorrectos");
         }
     }
@@ -30,7 +45,7 @@ const CodigoComponent = ({ handleUser, handleEvent }) => {
     React.useEffect(() => {
 
 
-        
+
         console.log("user en Codigo component: " +
             handleUser.email + handleUser.password +
             handleUser.telefono);
@@ -39,7 +54,7 @@ const CodigoComponent = ({ handleUser, handleEvent }) => {
 
         formData.append("email", handleUser.email);
         formData.append("password", handleUser.password);
-        formData.append("telefono", "52"+ handleUser.telefono);
+        formData.append("telefono", "52" + handleUser.telefono);
 
 
 
@@ -52,16 +67,16 @@ const CodigoComponent = ({ handleUser, handleEvent }) => {
 
         fetch(urlSms, {
             method: 'POST',
-            body: JSON.stringify({email: handleUser.email, telefono: "+52"+handleUser.telefono}), 
+            body: JSON.stringify({ email: handleUser.email, telefono: "+52" + handleUser.telefono }),
             headers: {
                 'Content-Type': 'application/json'
             }
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            setCodigoRest(data.toString());
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setCodigoRest(data.toString());
+            })
     }, []);
 
     return (

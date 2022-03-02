@@ -1,10 +1,44 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import './LoginComponent.css';
 // import RegisterComponent from "./RegisterComponent";
 
 
 
-const LoginComponent = ({handleEvent}) => {
+const LoginComponent = ({handleEvent, handleUser}) => {
+
+    const [passwordRest, setPasswordRest] = useState("");
+
+    const handleInputChange = (e) => {
+        if(e.target.name === "email"){
+            handleUser.email = e.target.value;
+        }
+        if(e.target.name === "password"){
+            handleUser.password = e.target.value;
+        }
+       
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("actual email:" + handleUser.email);
+        console.log("actual contra:" + handleUser.password);
+        let urlValidate = 'http://brc2022.somee.com/User1/ValidateUser';
+        fetch(urlValidate, {
+            method: 'POST',
+            body: JSON.stringify({email: handleUser.email, password: handleUser.password}), 
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if(data === "contraseña correcta"){
+                handleEvent("home")
+            }
+        })
+    }
+
     return (
         <Fragment>
             <div className="contenedor">
@@ -13,7 +47,7 @@ const LoginComponent = ({handleEvent}) => {
                     <h1>LOGIN</h1>
                     <form>
                         <div className="input-wrapper">
-                            <input className="input" type="email" placeholder="EMAIL"></input>
+                            <input onChange={handleInputChange} name="email" className="input" type="email" placeholder="EMAIL"></input>
                             <svg className="input-icon" width="29" height="23" viewBox="0 0 29 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="29" height="23" fill="url(#pattern0)" />
                                 <defs>
@@ -26,7 +60,7 @@ const LoginComponent = ({handleEvent}) => {
                         </div>
 
                         <div className="input-wrapper">
-                            <input className="input" type="password" placeholder="PASSWORD"></input>
+                            <input onChange={handleInputChange} name="password" className="input" type="password" placeholder="PASSWORD"></input>
                             <svg className="input-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M15.8333 9.16663H4.16667C3.24619 9.16663 2.5 9.91282 2.5 10.8333V16.6666C2.5 17.5871 3.24619 18.3333 4.16667 18.3333H15.8333C16.7538 18.3333 17.5 17.5871 17.5 16.6666V10.8333C17.5 9.91282 16.7538 9.16663 15.8333 9.16663Z" stroke="#0D0D0E" strokeLinecap="round" strokeLinejoin="round" />
                                 <path d="M5.83333 9.16663V5.83329C5.83333 4.72822 6.27232 3.66842 7.05372 2.88701C7.83512 2.10561 8.89493 1.66663 10 1.66663C11.1051 1.66663 12.1649 2.10561 12.9463 2.88701C13.7277 3.66842 14.1667 4.72822 14.1667 5.83329V9.16663" stroke="#0D0D0E" strokeLinecap="round" strokeLinejoin="round" />
@@ -45,7 +79,7 @@ const LoginComponent = ({handleEvent}) => {
 
                       
 
-                        <input type="submit" value="INGRESAR"></input>
+                        <input type="button" onClick={handleSubmit} value="INGRESAR"></input>
                     </form>
                 </div>
             </div>

@@ -20,7 +20,7 @@ const UserCompontent = (props) => {
 
 
     // if(componente === "") return <HomeComponent></HomeComponent>;
-    if(componente === "") return <LoginComponent handleEvent={setComponente}></LoginComponent>;
+    if(componente === "") return <LoginComponent handleUser={user} handleEvent={setComponente}></LoginComponent>;
 
     if(componente === "register") return <RegisterComponent handleEvent={setComponente}
     handleUser={user}></RegisterComponent>
@@ -28,6 +28,7 @@ const UserCompontent = (props) => {
 
     if(componente === "codigo") return <CodigoComponent handleUser={user} handleEvent={setComponente}></CodigoComponent>
 
+    if(componente === "home") return <HomeComponent  handleEvent={setComponente}></HomeComponent>;
 
 }
 
