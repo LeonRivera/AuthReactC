@@ -60,10 +60,10 @@ const CodigoComponent = ({ handleUser, handleEvent }) => {
 
 
 
-        let urlValidate = 'http://brc2022.somee.com/User1/ValidateUser';
+        // let urlValidate = 'http://brc2022.somee.com/User1/ValidateUser';
         let urlSms = 'http://brc2022.somee.com/Mensaje/SendCode';
-        let urlP = "http://brc2022.somee.com/api/User1"
-        let urlT = 'http://localhost:60566/api/User1';
+        // let urlP = "http://brc2022.somee.com/api/User1"
+        // let urlT = 'http://localhost:60566/api/User1';
 
         fetch(urlSms, {
             method: 'POST',
